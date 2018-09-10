@@ -1,0 +1,60 @@
+/************************************ Header ***********************************/
+#bootstrap-overrides .navbar {
+    background-image: linear-gradient(180deg, #35b729, #FFFFFF);
+    border: none;
+}
+
+#bootstrap-overrides .navbar .container {
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 95%;
+}
+
+#bootstrap-overrides .container {
+    position: relative;
+    text-align: center;
+}
+
+#bootstrap-overrides .navbar-brand {
+    font-size: 40px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    font-family: 'Old Standard TT', serif;
+    margin-right: -45px;
+}
+
+#bootstrap-overrides .navbar .logoWrapper {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#bootstrap-overrides .navbar .logoWrapper img {
+    height: 30px;
+    width: auto;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+
+/************************************ Footer ***********************************/
+#bootstrap-overrides .footerWrapper {
+    margin-top: 40px;
+    bottom: -10px;
+    color: #DDDDDD;
+    background-color: black;
+    width: 100%;
+    min-height: 20px;
+    display: block;
+}
+
+#bootstrap-overrides .footer {
+    font-size: 18px;
+    font-family: 'Old Standard TT', serif;
+    display: inline-block;
+    width: 33%;
+    height: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 0;
+    margin-right: 0;
+}
