@@ -1,0 +1,13 @@
+{% include "header.html" %}
+
+<div class="container">
+    <form action = "/agecheck" method="POST">
+        <h1>To confirm age, enter your date of birth.</h1>
+        <input type="date" name="myDate" value="2000-01-01">
+        <input type="submit">
+    </form>
+    <br>
+    <h1>You must be over 18 to use this site.</h1>
+</div>
+
+{% include "footer.html" %}

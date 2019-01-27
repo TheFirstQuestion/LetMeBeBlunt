@@ -1,0 +1,31 @@
+/********************************** productBlock ****************************************/
+#bootstrap-overrides div.productBlock {
+    display: inline-block;
+    margin: 2px;
+    width: 30%;
+    height: 300px;
+    vertical-align: top;
+}
+
+#bootstrap-overrides div.productBlock:hover {
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+#bootstrap-overrides .productBlock h3 {
+    font-size: 18px;
+    text-align: center;
+}
+
+#bootstrap-overrides .productBlock h6 {
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+    bottom: 0;
+}
+
+#bootstrap-overrides .productBlock img {
+    height: 65%;
+    max-width: 85%;
+}

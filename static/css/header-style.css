@@ -8,19 +8,12 @@
     margin-left: 2%;
     margin-right: 2%;
     width: 95%;
+    display: inline-block;
 }
 
 #bootstrap-overrides .container {
     position: relative;
     text-align: center;
-}
-
-#bootstrap-overrides .navbar-brand {
-    font-size: 40px;
-    color: white;
-    text-shadow: 1px 1px 1px black;
-    font-family: 'Old Standard TT', serif;
-    margin-right: -45px;
 }
 
 #bootstrap-overrides .navbar .logoWrapper {
@@ -35,6 +28,57 @@
     display: inline-block;
 }
 
+#bootstrap-overrides .menuLink {
+    margin-top: 25px;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 1px grey;
+    font-family: 'Old Standard TT', serif;
+    margin-left: 25px;
+    display: inline-block;
+}
+
+#bootstrap-overrides .menuLink a {
+    color: white;
+}
+
+#bootstrap-overrides .menuLink a:hover {
+    text-shadow: 1px 1px 1px black;
+}
+
+#bootstrap-overrides .navbar-brand {
+    color: white;
+    display: inline-block;
+    text-shadow: 1px 1px 1px black;
+    font-family: 'Old Standard TT', serif;
+    float: right;
+    font-size: 30px;
+    margin-top: -7px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+#bootstrap-overrides .navbar-brand a {
+    color: white;
+}
+
+#bootstrap-overrides .navbar-brand a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#bootstrap-overrides .dropdown-toggle {
+    cursor: pointer;
+}
+
+#bootstrap-overrides .dropdown-menu li a {
+    text-shadow: none;
+    color: black;
+}
+
+#bootstrap-overrides .dropdown-menu li a:hover {
+    text-shadow: none;
+}
 
 /************************************ Footer ***********************************/
 #bootstrap-overrides .footerWrapper {

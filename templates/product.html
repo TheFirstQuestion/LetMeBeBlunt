@@ -1,0 +1,20 @@
+{% include "header.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">
+<!-- To allow HTML tags in data, which Flask autoescapes -->
+{% autoescape false %}
+<div class="container">
+
+    
+    <div class="product">
+        <h1>{{ x.title }}</h1>
+        <div class="inline"><h3>{{ x.price }}</h3><h3>{{ "good to go" if x.weCarry else "out of stock" }}</h3></div>
+        <div class="row">
+            <p>{{ x.description }}</p>
+            <img src="/static/images/Products/{{ x.pic }}" />
+        </div>
+    </div>
+
+
+</div>
+{% endautoescape %}
+{% include "footer.html" %}

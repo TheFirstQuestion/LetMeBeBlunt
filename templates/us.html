@@ -1,0 +1,15 @@
+{% include "header.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index-style.css') }}">
+
+    <div class="container">
+        <h1>About Us</h1>
+        <a href="/terms"><h3>Terms and Conditions</h3></a>
+        <a href="/privacy"><h3>Privacy Policy</h3></a>
+        <a href="/disclaimer"><h3>Disclaimer</h3></a>
+        <div id="bigPicWrapper">
+            <img src="{{ url_for('static', filename='images/about.jpeg') }}" />
+        </div>
+    </div>
+
+
+{% include "footer.html" %}

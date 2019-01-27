@@ -1,0 +1,20 @@
+{% include "header.html" %}
+<!-- To allow HTML tags in data, which Flask autoescapes -->
+{% autoescape false %}
+<div class="container">
+
+    <h1>Education</h1>
+
+    <!-- Social media embedding -->
+    <script src="https://assets.juicer.io/embed.js" type="text/javascript"></script>
+    <link href="https://assets.juicer.io/embed.css" media="all" rel="stylesheet" type="text/css" />
+    <ul class="juicer-feed" data-feed-id="letmebeblunt"></ul>
+
+    {% for x in data %}
+        {{ x.tags }}
+    {% endfor %}
+
+
+</div>
+{% endautoescape %}
+{% include "footer.html" %}
