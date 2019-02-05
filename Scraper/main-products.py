@@ -17,7 +17,7 @@ for category in categoryLinks:
     # Get page
     page = requests.get("https://hempmedspx.com/" + category)
     # Because one is messed up, ugh
-    if category is "cbd-oil-capsules":
+    if category is "cbd-oil-capsules/":
         page = requests.get("https://hempmedspx.com/product-category/cbd-oil-capsules/")
 
     # Create a BeautifulSoup object
@@ -71,13 +71,15 @@ for cat in range(len(linkList)):
                 except Exception:
                     imgUrl = img.a["href"]
 
-                imgName = imgUrl.split("/")[-1]
-                imageNameFinal = imgName
-                print(img)
-                print(imgUrl)
-                print()
-                print()
-                urllib.request.urlretrieve(imgUrl, filename=("../static/images/Products/" + imgName))
+                # RSHO products have a banner with their logo, which we don't want
+                if imgUrl == "https://hempmedspx.com/wp-content/uploads/product-title-rsho-1.png":
+                    continue
+                else:
+                    imgName = imgUrl.split("/")[-1]
+                    imageNameFinal = imgName
+                    urllib.request.urlretrieve(imgUrl, filename=("../static/images/Products/" + imgName))
+                    # We only want one image, so stop
+                    break
 
 
 
