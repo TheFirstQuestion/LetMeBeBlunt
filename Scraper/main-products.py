@@ -58,6 +58,9 @@ for cat in range(len(linkList)):
             # Remove HTML tags from description
             htmlReg = r'<[^>]*>'
             description = re.sub(htmlReg, "", description)
+            # Get rid of the word 'vaping' (for payment people)
+            description = re.sub("vaping or ", "", description)
+
 
 
             # Images
