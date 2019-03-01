@@ -2,3 +2,6 @@ coming-soon-mockup.jpg
 Private/
 Scraper/__pycache__
 Scraper/ENVscraper
+payment-testing/
+constants.py
+__pycache__/

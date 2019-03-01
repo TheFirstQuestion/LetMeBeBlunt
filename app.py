@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, g, request, make_response
 import sqlite3
+import payment
 from datetime import datetime
 
 app = Flask(__name__)
@@ -96,6 +97,21 @@ def overEighteen():
             return False
     except Exception:
         return False
+
+@app.route("/checkout")
+def checkout():
+    if overEighteen():
+        name = request.args.get('item', None)
+        item = getProduct(name)[0]
+        return render_template('checkout.html', item=item)
+    else:
+        return redirect(url_for("ageGate"))
+
+@app.route('/handlePayment', methods=['POST'])
+def handlePayment():
+    p = getProduct(request.form.get("Product"))[0]
+    payment.doThePayStuff(request.form, p)
+    return render_template('paymentComplete.html')
 
 @app.route('/favicon.ico')
 def favicon():

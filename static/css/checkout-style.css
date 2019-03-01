@@ -1,0 +1,124 @@
+/* Global */
+/* Adapted from:  https://designmodo.com/create-credit-card-ui/ */
+
+.credit-card {
+  width: 360px;
+  margin: auto;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+}
+
+.form-header {
+  height: 60px;
+  padding: 20px 30px 0;
+  border-bottom: 1px solid #E1E8EE;
+}
+
+.form-body {
+  padding: 30px 30px 20px;
+}
+
+/* Title */
+.title {
+  margin: 0;
+  color: #666;
+  font-size: 20px;
+}
+
+/* Fields */
+input, select {
+  height: 42px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border: 2px solid #e1e8ee;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 14px;
+}
+
+/* Date Field */
+.month select, .year select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 145px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border: 2px solid #e1e8ee;
+  border-radius: 6px;
+  background: url('../images/caret.png') no-repeat;
+  background-position: 85% 50%;
+}
+
+.month select {
+  float: left;
+}
+
+.year select {
+  float: right;
+}
+
+/* Card Verification Field */
+.cvv-input input {
+  width: 145px;
+  float: left;
+  padding-left: 20px;
+  border: 2px solid #e1e8ee;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.cvv-details {
+  float: right;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  color: #86939e;
+  opacity: .7;
+}
+
+.cvv-details p {
+  margin-top: 6px;
+}
+
+/* Buttons Section */
+.paypal-btn, .proceed-btn {
+  cursor: pointer;
+  width: 100%;
+  border-color: transparent;
+  border-radius: 6px;
+  font-size: 18px;
+  text-decoration: none;
+  height: 40px;
+}
+
+.proceed-btn {
+  margin-bottom: 10px;
+  background: #7dc855;
+}
+
+.proceed-btn {
+  color: #fff;
+}
+
+.paypal-btn {
+  color: #eee;
+}
+
+.paypal-btn {
+  background-color: #009cde;
+}
+
+/************************************************/
+#paymentDetails {
+    font-style: italic;
+}
+
+hr {
+    margin-top: 0px;
+}
