@@ -13,12 +13,14 @@ def main():
     else:
         return redirect(url_for("ageGate"))
 
+
 @app.route("/categories")
 def categories():
     if overEighteen():
         return render_template('categories.html')
     else:
         return redirect(url_for("ageGate"))
+
 
 @app.route("/education")
 def education():
@@ -27,12 +29,14 @@ def education():
     else:
         return redirect(url_for("ageGate"))
 
+
 @app.route("/us")
 def us():
     if overEighteen():
         return render_template('us.html')
     else:
         return redirect(url_for("ageGate"))
+
 
 @app.route("/privacy")
 def privacy():
@@ -41,12 +45,14 @@ def privacy():
     else:
         return redirect(url_for("ageGate"))
 
+
 @app.route("/terms")
 def terms():
     if overEighteen():
         return render_template('terms.html')
     else:
         return redirect(url_for("ageGate"))
+
 
 @app.route("/disclaimer")
 def disclaimer():
@@ -55,13 +61,16 @@ def disclaimer():
     else:
         return redirect(url_for("ageGate"))
 
+
 @app.route('/category/<cat>', methods=['GET'])
 def renderCategory(cat):
     return render_template("category.html", data=getCategory(cat + "/"), cat=cat)
 
+
 @app.route('/product/<pro>', methods=['GET'])
 def renderProduct(pro):
     return render_template("product.html", x=getProduct(pro)[0], pro=pro)
+
 
 @app.route("/age-gate")
 def ageGate():
@@ -71,9 +80,11 @@ def ageGate():
     else:
         return eighteen()
 
+
 @app.route("/18")
 def eighteen():
     return render_template("18.html")
+
 
 @app.route("/agecheck", methods = ["POST", "GET"])
 def agecheck():
@@ -88,6 +99,7 @@ def agecheck():
 
     return resp
 
+
 def overEighteen():
     boo = request.cookies.get('ofAge')
     try:
@@ -98,20 +110,42 @@ def overEighteen():
     except Exception:
         return False
 
-@app.route("/checkout")
+
+@app.route('/cart')
+def cart():
+    name = request.args.get('item', None)
+    items = request.cookies.get('cartItems')
+    if items is None or len(items) == 0:
+        items = []
+    else:
+        items = items.split("BREAK")
+    if name is not None:
+        items.append(name)
+    sqliteItems = []
+    for i in items:
+        sqliteItems.append(getProduct(i)[0])
+    resp = make_response(render_template("cart.html", items=sqliteItems))
+    # Cookie must be a string
+    resp.set_cookie("cartItems", "BREAK".join(items))
+    return resp
+
+
+@app.route("/checkout", methods=['POST'])
 def checkout():
     if overEighteen():
-        name = request.args.get('item', None)
-        item = getProduct(name)[0]
-        return render_template('checkout.html', item=item)
+        f = request.form
+        return render_template('checkout.html', formStuff=f)
     else:
         return redirect(url_for("ageGate"))
 
+
 @app.route('/handlePayment', methods=['POST'])
 def handlePayment():
-    p = getProduct(request.form.get("Product"))[0]
-    payment.doThePayStuff(request.form, p)
-    return render_template('paymentComplete.html')
+    resp = make_response(render_template("paymentComplete.html"))
+    resp.set_cookie("cartItems", expires=0)
+    payment.doThePayStuff(request.form)
+    return resp
+
 
 @app.route('/favicon.ico')
 def favicon():

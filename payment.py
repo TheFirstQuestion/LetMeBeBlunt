@@ -4,17 +4,49 @@ import sys
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import createTransactionController
+from app import getProduct
+
 
 CONSTANTS = imp.load_source('modulename', 'constants.py')
 FORM_INFO = {}
-PRODUCT = None
+TOTAL = 0
 
-def doThePayStuff(formStuff, p):
-    global PRODUCT
-    PRODUCT = p
+def doThePayStuff(formStuff):
     for i in formStuff:
-        FORM_INFO.update({i: formStuff[i]})
+        if i == "FormStuff":
+            parseDict(formStuff[i])
+        else:
+            FORM_INFO.update({i: formStuff[i]})
     charge_credit_card()
+
+
+def parseDict(inp):
+    purchases = []
+    inp = inp[20:].split(")")
+    for x in inp:
+        terms = x.split(",")
+        #print(terms)
+        if len(terms) < 2:
+            continue
+        #print("Total" in terms[0])
+        if "Total" in terms[0]:
+            global TOTAL
+            TOTAL = terms[1][3:8]
+        elif "Total" in terms[1]:
+            global TOTAL
+            TOTAL = terms[2][3:8]
+        else:
+            if len(terms) == 2:
+                name = terms[0][2:-5]
+                qty = terms[1][2:-1]
+            else:
+                name = terms[1][3:-5]
+                qty = terms[2][2:-1]
+            #print(name)
+            p = getProduct(name)[0]
+            price = p["Price"][-12:-7]
+            purchases.append([name, qty, price])
+    FORM_INFO.update({"Purchases": purchases})
 
 
 # From https://github.com/AuthorizeNet/sample-code-python
@@ -37,7 +69,7 @@ def charge_credit_card():
     # Create order information
     order = apicontractsv1.orderType()
     #order.invoiceNumber = "10101"
-    order.description = FORM_INFO["Product"]
+    order.description = "Product order"
 
     # Set the customer's Bill To address
     customerAddress = apicontractsv1.customerAddressType()
@@ -64,29 +96,23 @@ def charge_credit_card():
     settings = apicontractsv1.ArrayOfSetting()
     settings.setting.append(duplicateWindowSetting)
 
-    # setup individual line items
-    line_item_1 = apicontractsv1.lineItemType()
-    line_item_1.itemId = str(PRODUCT[0])
-    line_item_1.name = str(PRODUCT[1])
-    #line_item_1.description = str(PRODUCT[4])
-    line_item_1.quantity = "1"
-    line_item_1.unitPrice = PRODUCT[3].split("</span>")[-2]
-    #line_item_2 = apicontractsv1.lineItemType()
-    #line_item_2.itemId = "67890"
-    #line_item_2.name = "second"
-    #line_item_2.description = "Here's the second line item"
-    #line_item_2.quantity = "3"
-    #line_item_2.unitPrice = "7.95"
-
     # build the array of line items
     line_items = apicontractsv1.ArrayOfLineItem()
-    line_items.lineItem.append(line_item_1)
-    #line_items.lineItem.append(line_item_2)
+    for i in FORM_INFO["Purchases"]:
+        # setup individual line items
+        line_item_1 = apicontractsv1.lineItemType()
+        line_item_1.itemId = i[0]
+        line_item_1.name = i[0]
+        #line_item_1.description = str(PRODUCT[4])
+        line_item_1.quantity = i[1]
+        line_item_1.unitPrice = i[2]
+
+        line_items.lineItem.append(line_item_1)
 
     # Create a transactionRequestType object and add the previous objects to it.
     transactionrequest = apicontractsv1.transactionRequestType()
     transactionrequest.transactionType = "authCaptureTransaction"
-    transactionrequest.amount = PRODUCT[3].split("</span>")[-2]
+    transactionrequest.amount = TOTAL
     transactionrequest.payment = payment
     transactionrequest.order = order
     transactionrequest.billTo = customerAddress

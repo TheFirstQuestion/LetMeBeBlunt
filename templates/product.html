@@ -9,7 +9,7 @@
         <h1>{{ x.title }}</h1>
         <div class="inline"><h3>{{ x.price }}</h3><h3>
             {% if x.weCarry %}
-                <a href='{{ url_for("checkout", item=x.title) }}'>Buy Now</a>
+                <a href='{{ url_for("cart", item=x.title) }}'>Add to Cart</a>
             {% else %}
                 {{ "out of stock" }}
             {% endif %}

@@ -21,11 +21,25 @@
     margin-top: 20px;
 }
 
+#bootstrap-overrides .navbar .cartWrapper {
+    display: inline-block;
+    margin-top: 20px;
+}
+
 #bootstrap-overrides .navbar .logoWrapper img {
     height: 30px;
     width: auto;
     margin-right: 10px;
     display: inline-block;
+}
+
+#bootstrap-overrides .navbar .cartWrapper img {
+    height: 30px;
+    width: auto;
+    margin-left: 15px;
+    margin-top: -5px;
+    display: inline-block;
+    vertical-align: center;
 }
 
 #bootstrap-overrides .menuLink {

@@ -4,18 +4,15 @@
 
 <div class="container">
     <h1>Checkout</h1>
-    <!-- To allow HTML tags in data, which Flask autoescapes -->
-    {% autoescape false %}
-    <h4 id="paymentDetails">{{ item.price }} for {{ item.title }}</h4>
-    {% endautoescape %}
-
+    <h4>Your total today is {{ formStuff["Total"] }}.</h4>
 
     <form class="credit-card" action="{{ url_for('handlePayment') }}" method="post">
+
+      <input type="hidden" name="FormStuff" value="{{ formStuff }}"></input>
+
       <div class="form-header">
         <h4 class="title">Credit Card</h4>
       </div>
-
-      <input type="hidden" name="Product" value="{{ item.title }}">
 
       <div class="form-body">
         <!-- Personal Info-->

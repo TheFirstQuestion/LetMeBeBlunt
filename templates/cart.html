@@ -1,0 +1,73 @@
+{% include "header.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cart-style.css') }}">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!-- To allow HTML tags in data, which Flask autoescapes -->
+{% autoescape false %}
+
+<div class="container">
+    <h1>Cart</h1>
+    <form action="{{ url_for('checkout') }}" method="post">
+        <input type="hidden" name="Total" class="total"></input>
+      <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in items %}
+                <tr class="{{ x }}">
+                  <td>{{ x.title }}</td>
+                  <td>{{ x.price }}</td>
+                  <td><input type="text" name="{{ x.title }}-qty" class="quantities"></td>
+                  <td class="price">{{ x.price }}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>Total: <span class="total"></span></h3>
+          <button type="submit">Proceed to Checkout</button>
+    </form>
+
+
+
+    <script>
+        $(document).ready(function(){
+            // Set quantity to 1
+            $(".quantities").each(function() {
+                $(this).val(1);
+            });
+            // Set total price
+            updateSum();
+        });
+
+        $(".quantities").change(function() {
+            // Change this price
+            var qty = $(this).val();
+            $(this).val(qty);
+            var unitPrice = $(this).parent().prev().text().substring(1);
+            $(this).parent().next().text("$" + unitPrice * qty);
+            // Change total price
+            updateSum();
+        });
+
+        function updateSum() {
+            var sum = 0;
+            $(".price").each(function(i, obj) {
+                sum += parseFloat($(obj).text().substring(1));
+            });
+            $(".total").each(function(i, obj) {
+                $(this).text("$" + sum);
+                $(this).val("$" + sum);
+            });
+        }
+
+    </script>
+
+</div>
+{% endautoescape %}
+{% include "footer.html" %}
