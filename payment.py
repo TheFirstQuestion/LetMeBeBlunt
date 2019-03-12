@@ -4,7 +4,7 @@ import sys
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import createTransactionController
-from app import getProduct
+import app
 
 
 CONSTANTS = imp.load_source('modulename', 'constants.py')
@@ -30,10 +30,10 @@ def parseDict(inp):
             continue
         #print("Total" in terms[0])
         if "Total" in terms[0]:
-            global TOTAL
+            #global TOTAL
             TOTAL = terms[1][3:8]
         elif "Total" in terms[1]:
-            global TOTAL
+            #global TOTAL
             TOTAL = terms[2][3:8]
         else:
             if len(terms) == 2:
@@ -43,7 +43,7 @@ def parseDict(inp):
                 name = terms[1][3:-5]
                 qty = terms[2][2:-1]
             #print(name)
-            p = getProduct(name)[0]
+            p = app.getProduct(name)[0]
             price = p["Price"][-12:-7]
             purchases.append([name, qty, price])
     FORM_INFO.update({"Purchases": purchases})

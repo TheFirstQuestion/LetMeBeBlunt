@@ -29,7 +29,7 @@
         </tbody>
       </table>
 
-      <h3>Total: <span class="total"></span></h3>
+      <h3>Total: <span class="total"></span> (7% sales tax included)</h3>
           <button type="submit">Proceed to Checkout</button>
     </form>
 
@@ -57,9 +57,16 @@
 
         function updateSum() {
             var sum = 0;
+            // Add each price
             $(".price").each(function(i, obj) {
                 sum += parseFloat($(obj).text().substring(1));
             });
+            // Add sales tax
+            sum = sum * 1.07;
+            // Round to 2 decimal places
+            var precision = Math.pow(10, 2);
+            sum = Math.ceil(sum * precision) / precision;
+            // Insert price into text
             $(".total").each(function(i, obj) {
                 $(this).text("$" + sum);
                 $(this).val("$" + sum);
