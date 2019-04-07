@@ -95,3 +95,19 @@ table tr:hover td {
 	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
 	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
 }
+
+.x {
+	text-align: center !important;
+}
+
+.x a {
+	text-align: center !important;
+	font-size: 24px;
+	color: red !important;
+	text-decoration: bold !important;
+}
+
+.x a:hover {
+	text-decoration: none;
+	cursor: pointer;
+}

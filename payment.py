@@ -1,6 +1,7 @@
 import imp
 import os
 import sys
+import decimal
 
 from authorizenet import apicontractsv1
 from authorizenet.apicontrollers import createTransactionController
@@ -12,11 +13,19 @@ FORM_INFO = {}
 TOTAL = 0
 
 def doThePayStuff(formStuff):
+    # Clear from previous purchases
+    global TOTAL
+    TOTAL = 0
+    global FORM_INFO
+    FORM_INFO = {}
     for i in formStuff:
         if i == "FormStuff":
             parseDict(formStuff[i])
         else:
             FORM_INFO.update({i: formStuff[i]})
+    print(FORM_INFO)
+    for i in FORM_INFO["Purchases"]:
+        TOTAL = TOTAL + (int(i[1]) * decimal.Decimal(i[2]))
     charge_credit_card()
 
 
@@ -80,8 +89,9 @@ def charge_credit_card():
     customerAddress.address = FORM_INFO["Address"]
     customerAddress.city = "Indianapolis"
     customerAddress.state = "IN"
-    #customerAddress.zip = "44628"
-    #customerAddress.country = "USA"
+    customerAddress.zip = FORM_INFO["ZipCode"]
+    customerAddress.country = "USA"
+    customerAddress.phoneNumber = FORM_INFO["Phone"]
 
     # Set the customer's identifying information
     customerData = apicontractsv1.customerDataType()

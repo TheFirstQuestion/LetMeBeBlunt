@@ -114,13 +114,18 @@ def overEighteen():
 @app.route('/cart')
 def cart():
     name = request.args.get('item', None)
+    rem = request.args.get('rem', None)
     items = request.cookies.get('cartItems')
     if items is None or len(items) == 0:
         items = []
     else:
         items = items.split("BREAK")
+    # Add an item
     if name is not None:
         items.append(name)
+    # Remove an item
+    if rem is not None:
+        items.remove(rem)
     sqliteItems = []
     for i in items:
         sqliteItems.append(getProduct(i)[0])

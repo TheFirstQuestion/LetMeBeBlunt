@@ -11,6 +11,7 @@
       <table>
         <thead>
             <tr>
+                <th>Remove</th>
                 <th>Item</th>
                 <th>Unit Price</th>
                 <th>Quantity</th>
@@ -19,7 +20,8 @@
         </thead>
         <tbody>
             {% for x in items %}
-                <tr class="{{ x }}">
+                <tr class="{{ x.title }}">
+                  <td class="x"><a href="{{ url_for('cart', rem=x.title) }}">x</a></td>
                   <td>{{ x.title }}</td>
                   <td>{{ x.price }}</td>
                   <td><input type="text" name="{{ x.title }}-qty" class="quantities"></td>

@@ -42,7 +42,7 @@ input, select {
 }
 
 /* Date Field */
-.month select, .year select {
+select {
   -moz-appearance: none;
   -webkit-appearance: none;
   width: 145px;
@@ -52,6 +52,11 @@ input, select {
   border-radius: 6px;
   background: url('../images/caret.png') no-repeat;
   background-position: 85% 50%;
+}
+
+#zipSelect {
+    width: 100%;
+    background-position: 93% 50%;
 }
 
 .month select {
